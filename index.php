@@ -15,14 +15,14 @@ if(!isset($_SESSION['username'])){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Araç Kiralama Otomasyon</title>
   </head>
   <body>
 
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-static-top">
-      <!--<a class="navbar-brand" href="#">Araç Otomasyon</a>-->
+      <a class="navbar-brand" href="#">Araç Otomasyon</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -37,7 +37,7 @@ if(!isset($_SESSION['username'])){
             ?>
             <li class="nav-item"><a class="nav-link"  href="#">Kullanıcı Ekleme</a></li>
             <li class="nav-item"><a class="nav-link"  href="#">Kullanıcı Sorgulama</a></li>
-            <li class="nav-item"><a  class="nav-link"  href="#">Araç Ekleme</a></li>
+            <li class="nav-item"><a  class="nav-link"  href="readData.php">Araç Ekleme</a></li>
             <li class="nav-item"><a class="nav-link"  href="#">Araç Silme</a></li>            
             <li class="nav-item"><a  class="nav-link" href="#">Araç Düzenleme</a></li>
             <?php
@@ -57,7 +57,7 @@ if(!isset($_SESSION['username'])){
           <div class="col-md-3">
             <div class="list-group">
               <a href="#" class="list-group-item list-group-item-action active">1</a>
-              <a href="#" class="list-group-item list-group-item-action">2</a>
+              <a href="table.php" class="list-group-item list-group-item-action">ekleme</a>
               <a href="#" class="list-group-item list-group-item-action">3</a>
               <a href="logout.php" class="list-group-item list-group-item-action">Çıkış</a>
             </div>
@@ -74,11 +74,33 @@ if(!isset($_SESSION['username'])){
               </div>
           </div>
       </div>
+      
+      
+                        <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            ...
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
   </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="js/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
