@@ -2,10 +2,10 @@
 -- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 01, 2018 at 07:49 AM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.2
+-- Anamakine: 127.0.0.1
+-- Üretim Zamanı: 01 Nis 2018, 23:02:00
+-- Sunucu sürümü: 10.1.30-MariaDB
+-- PHP Sürümü: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rent`
+-- Veritabanı: `rent`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cars`
+-- Tablo için tablo yapısı `cars`
 --
 
 CREATE TABLE `cars` (
@@ -39,7 +39,7 @@ CREATE TABLE `cars` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kullanicilar`
+-- Tablo için tablo yapısı `kullanicilar`
 --
 
 CREATE TABLE `kullanicilar` (
@@ -50,7 +50,7 @@ CREATE TABLE `kullanicilar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `kullanicilar`
+-- Tablo döküm verisi `kullanicilar`
 --
 
 INSERT INTO `kullanicilar` (`id`, `username`, `password`, `type`) VALUES
@@ -60,28 +60,28 @@ INSERT INTO `kullanicilar` (`id`, `username`, `password`, `type`) VALUES
 (7, 'yusuf', 'e58c41b5e93ad52aee69d81e8e549336', 'yonetici');
 
 --
--- Indexes for dumped tables
+-- Dökümü yapılmış tablolar için indeksler
 --
 
 --
--- Indexes for table `cars`
+-- Tablo için indeksler `cars`
 --
 ALTER TABLE `cars`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kullanicilar`
+-- Tablo için indeksler `kullanicilar`
 --
 ALTER TABLE `kullanicilar`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `kullanici` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
 --
 
 --
--- AUTO_INCREMENT for table `kullanicilar`
+-- Tablo için AUTO_INCREMENT değeri `kullanicilar`
 --
 ALTER TABLE `kullanicilar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
