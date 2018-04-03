@@ -9,53 +9,38 @@ if(!isset($_SESSION['username'])){
 require_once 'readDataConfig.php';
  
 // Define variables and initialize with empty values
-$username = $password = $type = "";
-$username_err = $password_err = $type_err = "";
+$plate = $vites = $fuel = $carName = "";
+$plate_err = $vites_err = $fuel_err = $carName_err =  "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    // Validate username
-    $input_username = trim($_POST["username"]);
-    if(empty($input_username)){
-        $username_err = "Lütfen bir kullanıcı adı girin.";
-    } else{
-        $username = $input_username;
-    }
-    
-    // Validate password
-    $input_password = trim($_POST["password"]);
-    if(empty($input_password)){
-        $password_err = 'Please enter an password.';     
-    } else{
-        $password = md5($input_password);
-    }
-    
-    // Validate type
-    $input_type = trim($_POST["type"]);
-    if(empty($input_type)){
-        $type_err = "Please enter the type";     
-    } else{
-        $type = $input_type;
-    }
-    
+
+    $plate = trim($_POST["plate"]);
+    $vites = trim($_POST["vites"]);
+    $fuel = trim($_POST["fuel"]);
+    $carName = trim($_POST["carName"]);
+
+           
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($type_err)){
+    if(empty($plate_err) && empty($vites_err) && empty($fuel_err) && empty($carName_Err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO kullanicilar (username, password, type) VALUES (?, ?, ?)";
-         echo "sql olustu";
+        $sql = "INSERT INTO cars (plate, vites, fuel, carName, durum) VALUES (?, ?, ?, ?, ?)";
+         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_type);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_plate, $param_vites, $param_fuel, $param_carName, $param_durum);
             
             // Set parameters
-            $param_username = $username;
-            $param_password = md5($password);
-            $param_type = $type;
-            echo "parametreler alındı.";
+            $param_plate = $plate;
+            $param_vites= $vites;
+            $param_fuel = $fuel;
+            $param_carName = $carName;
+            $param_durum = "alınabilir";
+            
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Records created successfully. Redirect to landing page
-                header("location: readData.php");die();
+                header("location: readCars.php");die();
                 exit();
             } else{
                 echo "Something went wrong. Please try again later.";
@@ -122,25 +107,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <div class="page-header">
                         <h2>Yeni Kayıt</h2>
                     </div>
-                    <p>Kullanıcı eklemek için lütfen formu doldurun.</p>
+                    <p>Araç eklemek için lütfen formu doldurun.</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div class="form-group <?php echo (!empty($username)) ? 'has-error' : ''; ?>">
-                            <label>Kullanıcı Adı</label>
-                            <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                            <span class="help-block"><?php echo $username_err;?></span>
+                        <div class="form-group <?php echo (!empty($plate_err)) ? 'has-error' : ''; ?>">
+                            <label>Plaka</label>
+                            <input type="text" name="plate" class="form-control" value="<?php echo $plate; ?>">
+                            <span class="help-block"><?php echo $plate_err;?></span>
                         </div>
-                        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                            <label>Şifre</label>
-                            <input type="password" name="password" class="form-control" >
-                            <span class="help-block"><?php echo $password_err;?></span>
+                        <div class="form-group <?php echo (!empty($vites_err)) ? 'has-error' : ''; ?>">
+                            <label>Vites</label>
+                            <input type="text" name="vites" class="form-control" value="<?php echo $vites; ?>">
+                            <span class="help-block"><?php echo $vites_err;?></span>
                         </div>
-                        <div class="form-group <?php echo (!empty($type_err)) ? 'has-error' : ''; ?>">
-                            <label>Yetki</label>
-                            <input type="text" name="type" class="form-control"  value="<?php echo $type; ?>">
-                            <span class="help-block"><?php echo $type_err;?></span>
+                        <div class="form-group <?php echo (!empty($fuel_err)) ? 'has-error' : ''; ?>">
+                            <label>Yakıt</label>
+                            <input type="text" name="fuel" class="form-control"  value="<?php echo $fuel; ?>">
+                            <span class="help-block"><?php echo $fuel_err;?></span>
+                        </div>
+                        <div class="form-group <?php echo (!empty($carName_err)) ? 'has-error' : ''; ?>">
+                            <label>Araç Adı</label>
+                            <input type="text" name="carName" class="form-control"  value="<?php echo $carName; ?>">
+                            <span class="help-block"><?php echo $carName_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Ekle">
-                            <a href="readData.php" class="btn btn-default">İptal</a>
+                            <a href="readCars.php" class="btn btn-default">İptal</a>
                     </form>
                 </div>
             </div>        

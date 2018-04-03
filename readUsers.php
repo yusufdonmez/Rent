@@ -4,6 +4,8 @@ session_start();
 if(!isset($_SESSION['username'])){
     header("location:login.php");
     die();
+}elseif ($_SESSION['type'] != 'yonetici') {
+    header("location:index.php"); die();
 }
 ?>
 
@@ -37,8 +39,7 @@ if(!isset($_SESSION['username'])){
 
 <body>
     
-    
-     <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-static-top">
+         <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-static-top">
       <a class="navbar-brand" href="#">Araç Otomasyon</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -52,15 +53,11 @@ if(!isset($_SESSION['username'])){
             <?php
             if($_SESSION['type'] == 'yonetici'){
             ?>
-            <li class="nav-item"><a class="nav-link"  href="#">Kullanıcı Ekleme</a></li>
-            <li class="nav-item"><a class="nav-link"  href="#">Kullanıcı Sorgulama</a></li>
-            <li class="nav-item"><a  class="nav-link"  href="readData.php">Araç Ekleme</a></li>
-            <li class="nav-item"><a class="nav-link"  href="#">Araç Silme</a></li>            
-            <li class="nav-item"><a  class="nav-link" href="#">Araç Düzenleme</a></li>
+            <li class="nav-item"><a class="nav-link"  href="readUsers.php">Kullanıcı İşlemleri</a></li>
             <?php
             }
             ?>
-            <li class="nav-item"><a class="nav-link"  href="#">Araç Sorgulama</a></li>  
+            <li class="nav-item"><a class="nav-link"  href="readCars.php">Araç İşlemleri</a></li>
         </ul>
 
       </div>
@@ -121,7 +118,7 @@ if(!isset($_SESSION['username'])){
                                         echo "<td>";
                                             echo "<a href='read.php?id=". $row['id'] ."' title='View Record' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
                                             echo "<a href='edit.php?id=". $row['id'] ."' title='Düzenle' data-toggle='modal' data-target='#exampleModal' data-whatever='".$row['id']."'><span class='glyphicon glyphicon-pencil'></span></a>";
-                                            echo "<a href='delete.php?id=". $row['id'] ."' title='Delete Record' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
+                                            echo "<a href='delete.php?id=". $row['id'] ."' title='Kayıt Sil' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }

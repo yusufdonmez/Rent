@@ -8,11 +8,11 @@
     	$password = $_POST['password'];
     	$yetki = $_POST['yetki'];
     
-        $sql = ("UPDATE 'kullanicilar' SET 'username' = ".$username.", `password` = ".md5($password).", `type`=".$yetki." WHERE `id`=".$id);
+        $sql = ("UPDATE kullanicilar SET username = '".$username."', password = '".md5($password)."', type = '".$yetki."' WHERE id ='".$id."'");
         $result = mysqli_query($link, $sql);
-        echo $sql."--".$result;
+        //echo $sql."--".$result;
             
-    	//header("location:index.php");
+    	header("location:readUsers.php");
     }
     $sql = "SELECT * FROM `kullanicilar` WHERE `id`=".$id;
     $result = mysqli_query($link, $sql);
@@ -28,7 +28,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Using Bootstrap modal</title>
+    <title>Kullanıcı İşlemleril</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">

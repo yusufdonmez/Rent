@@ -35,15 +35,11 @@ if(!isset($_SESSION['username'])){
             <?php
             if($_SESSION['type'] == 'yonetici'){
             ?>
-            <li class="nav-item"><a class="nav-link"  href="#">Kullanıcı Ekleme</a></li>
-            <li class="nav-item"><a class="nav-link"  href="#">Kullanıcı Sorgulama</a></li>
-            <li class="nav-item"><a  class="nav-link"  href="readData.php">Araç Ekleme</a></li>
-            <li class="nav-item"><a class="nav-link"  href="#">Araç Silme</a></li>            
-            <li class="nav-item"><a  class="nav-link" href="#">Araç Düzenleme</a></li>
+            <li class="nav-item"><a class="nav-link"  href="readUsers.php">Kullanıcı İşlemleri</a></li>
             <?php
             }
             ?>
-            <li class="nav-item"><a class="nav-link"  href="#">Araç Sorgulama</a></li>  
+            <li class="nav-item"><a class="nav-link"  href="readCars.php">Araç İşlemleri</a></li>
         </ul>
 
       </div>
@@ -56,9 +52,8 @@ if(!isset($_SESSION['username'])){
       <div class="row">
           <div class="col-md-3">
             <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action active">1</a>
-              <a href="table.php" class="list-group-item list-group-item-action">ekleme</a>
-              <a href="#" class="list-group-item list-group-item-action">3</a>
+              <a href="readUsers.php" class="list-group-item list-group-item-action active">Kullanıcı İşlemleri</a>
+              <a href="readCars.php" class="list-group-item list-group-item-action">Araç İşlemleri</a>
               <a href="logout.php" class="list-group-item list-group-item-action">Çıkış</a>
             </div>
           </div>
@@ -69,7 +64,7 @@ if(!isset($_SESSION['username'])){
                   <hr class="my-4">
                   <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
                   <p class="lead">
-                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Deneme</a>
                   </p>
               </div>
           </div>
