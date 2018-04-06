@@ -12,14 +12,12 @@
         $result = mysqli_query($link, $sql);
         //echo $sql."--".$result;
             
-    	header("location:readUsers.php");
-    }
+    	header("location:newReadUsers.php");
+    } 
     $sql = "SELECT * FROM `kullanicilar` WHERE `id`=".$id;
     $result = mysqli_query($link, $sql);
     $mem = mysqli_fetch_array($result);
             
-    //$members = $mysqli->query("SELECT * FROM `kullanicilar` WHERE `id`='$id'");
-    //$mem = mysqli_fetch_assoc($members);
 ?>
 
 <!DOCTYPE html>

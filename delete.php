@@ -5,6 +5,6 @@
         $sql = ("DELETE FROM kullanicilar WHERE id=".$id);
         $result = mysqli_query($link, $sql);
                     
-    	header("location:readUsers.php");
+    	header("location:newReadUsers.php");
  
 ?>

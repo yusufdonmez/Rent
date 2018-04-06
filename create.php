@@ -1,10 +1,7 @@
 <?php
+include "checkin.php";
 include "config.php";
-session_start();
-if(!isset($_SESSION['username'])){
-    header("location:login.php");
-    die();
-}
+
 // Include config file
 require_once 'readDataConfig.php';
  
@@ -45,27 +42,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
          echo "sql olustu";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_type);
-            
-            // Set parameters
-            $param_username = $username;
-            $param_password = md5($password);
-            $param_type = $type;
-            echo "parametreler alındı.";
+            mysqli_stmt_bind_param($stmt, "sss", $username, $password, $type);
+        
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Records created successfully. Redirect to landing page
-                header("location: readData.php");die();
+                header("location: newReadUsers.php");die();
                 exit();
             } else{
                 echo "Something went wrong. Please try again later.";
             }
-        }
-         
+        }         
         // Close statement
         mysqli_stmt_close($stmt);
-    }
-    
+    }    
     // Close connection
     mysqli_close($link);
 }
@@ -76,20 +66,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <head>
     <meta charset="UTF-8">
     <title>Yeni Kayıt Oluştur</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
-    <style type="text/css">
-        .wrapper{
-            width: 500px;
-            margin: 0 auto;
-        }
-    </style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="js/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="js/popper.min.js" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-static-top">
-      <a class="navbar-brand" href="#">Araç Otomasyon</a>
+      <a class="navbar-brand" href="#">Araç Kiralama Otomasyonu</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -102,23 +87,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <?php
             if($_SESSION['type'] == 'yonetici'){
             ?>
-            <li class="nav-item"><a class="nav-link"  href="readUsers.php">Kullanıcı İşlemleri</a></li>
+            <li class="nav-item"><a class="nav-link"  href="newReadUsers.php">Kullanıcı İşlemleri</a></li>
             <?php
             }
             ?>
-            <li class="nav-item"><a class="nav-link"  href="readCars.php">Araç İşlemleri</a></li>
+            <li class="nav-item"><a class="nav-link"  href="newReadCars.php">Araç İşlemleri</a></li>
         </ul>
-
       </div>
-          <ul class="nav navbar-nav navbar-left">
-              <li class="nav-item"><a class="nav-link"><?php echo $_SESSION['username'] ?></a></li>
-             <li class="nav-item" ><a class="btn btn-danger" href="logout.php" role="button">ÇIKIŞ</a></li>
-          </ul>
+        <ul class="navbar-nav">          
+            <li class="nav-item"><a class="nav-link"><?php echo $_SESSION['username'] ?></a></li>
+            <li class="nav-item" ><a class="btn btn-danger" href="logout.php" role="button">ÇIKIŞ</a></li>
+        </ul>
     </nav>
-    <div class="wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
+
+<div class="container">
+      <div class="row">
+          <div class="col-md-2"> </div>
+          <div class="col-md-9">
+              <div class="jumbotron">
                     <div class="page-header">
                         <h2>Yeni Kayıt</h2>
                     </div>
@@ -140,7 +126,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="help-block"><?php echo $type_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Ekle">
-                            <a href="readData.php" class="btn btn-default">İptal</a>
+                            <a href="newReadUsers.php" class="btn btn-default">İptal</a>
                     </form>
                 </div>
             </div>        

@@ -5,6 +5,6 @@
         $sql = ("DELETE FROM cars WHERE id=".$id);
         $result = mysqli_query($link, $sql);
                     
-    	header("location:readCars.php");
+    	header("location:newReadCars.php");
 ?>
 

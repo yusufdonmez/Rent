@@ -5,23 +5,20 @@
     if (isset($_POST['submit'])) {
     	$id = $_POST['id'];
     	$plate = $_POST['plate'];
-    	$vites = $_POST['vites'];
+    	$gear = $_POST['gear'];
     	$fuel = $_POST['fuel'];
     	$carName = $_POST['carName'];
-    	$durum = $_POST['durum'];
+    	$status = $_POST['status'];
     
-        $sql = ("UPDATE cars SET plate = '".$plate."', vites = '".$vites."', fuel = '".$fuel."', carName = '".$carName."', durum = '".$durum."' WHERE id ='".$id."'");
+        $sql = ("UPDATE cars SET plate = '".$plate."', gear = '".$gear."', fuel = '".$fuel."', carName = '".$carName."', status = '".$status."' WHERE id ='".$id."'");
         $result = mysqli_query($link, $sql);
         //echo $sql."--".$result;
             
-    	header("location:readCars.php");
+    	header("location:newReadCars.php");
     }
     $sql = "SELECT * FROM `cars` WHERE `id`=".$id;
     $result = mysqli_query($link, $sql);
-    $mem = mysqli_fetch_array($result);
-            
-    //$members = $mysqli->query("SELECT * FROM `kullanicilar` WHERE `id`='$id'");
-    //$mem = mysqli_fetch_assoc($members);
+    $mem = mysqli_fetch_array($result);       
 ?>
 
 <!DOCtype html>
@@ -47,8 +44,8 @@
 	            <input type="text" class="form-control" id="plate" name="plate" value="<?php echo $mem['plate'];?>" />
 		</div>
 		<div class="form-group">
-		    <label for="vites">Vites</label>
-	            <input type="vites" class="form-control" id="vites" name="vites" value=''/>
+		    <label for="gear">Vites</label>
+	            <input type="gear" class="form-control" id="gear" name="gear" value="<?php echo $mem['gear'];?>" />
 		</div>
 		<div class="form-group">
 		     <label for="fuel">Yakıt</label>
@@ -59,8 +56,8 @@
 		     <input type="text" class="form-control" id="carName" name="carName" value="<?php echo $mem['carName'];?>" />
 		</div>
 		<div class="form-group">
-		     <label for="durum">Durumu</label>
-		     <input type="text" class="form-control" id="durum" name="durum" value="<?php echo $mem['durum'];?>" />
+		     <label for="status">Durumu</label>
+		     <input type="text" class="form-control" id="status" name="status" value="<?php echo $mem['status'];?>" />
 		</div>
 		</div>
 		<div class="modal-footer">
