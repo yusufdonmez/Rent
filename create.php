@@ -3,7 +3,7 @@ include "checkin.php";
 include "config.php";
 
 // Include config file
-require_once 'readDataConfig.php';
+//require_once 'readDataConfig.php';
  
 // Define variables and initialize with empty values
 $username = $password = $type = "";
@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($input_password)){
         $password_err = 'Please enter an password.';     
     } else{
-        $password = md5($input_password);
+        $password = $input_password;
     }
     
     // Validate type

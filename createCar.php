@@ -3,7 +3,7 @@ include "checkin.php";
 include "config.php";
 
 // Include config file
-require_once 'readDataConfig.php';
+//require_once 'readDataConfig.php';
  
 // Define variables and initialize with empty values
 $plate = $gear = $fuel = $carName = "";

@@ -58,7 +58,7 @@ include "config.php";
 
                 <?php
                     // Include config file
-                    require_once 'readDataConfig.php';
+                    //require_once 'readDataConfig.php';
                     
                     // Attempt select query execution
                     $sql = "SELECT * FROM kullanicilar";

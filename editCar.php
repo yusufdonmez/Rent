@@ -1,5 +1,6 @@
 <?php
-    require('./readDataConfig.php');
+	include "config.php";
+    //require('./readDataConfig.php');
     $id = $_GET['id'];
 
     if (isset($_POST['submit'])) {

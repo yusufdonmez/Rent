@@ -1,5 +1,6 @@
 <?php
-    require('./readDataConfig.php');
+    //require('./readDataConfig.php');
+	include "config.php";
     $id = $_GET['id'];
     
         $sql = ("DELETE FROM cars WHERE id=".$id);

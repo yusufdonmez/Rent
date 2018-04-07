@@ -42,36 +42,41 @@
                         include 'config.php';
                         if( !empty($_POST['username'])  && !empty($_POST['password'])){
                             $username = $_POST['username'];
-                            $password = md5($_POST['password']);                   
-                            $stmt = $db->prepare("SELECT * FROM kullanicilar WHERE username=? AND password=?"); 
-                            $stmt->bindParam(1,$username);
-                            $stmt->bindParam(2,$password);
-                            $stmt->execute();
-                            $row = $stmt->fetch();
+                            $password = $_POST['password'];                   
+                            
+                           $sql = "SELECT * FROM kullanicilar WHERE username='".$username."' AND password='".$password."'"; 
+                            //$sql = "SELECT * FROM kullanicilar WHERE username='' OR '1'='1' ";//
+                           //print_r($sql);
+                            $result = mysqli_query($link, $sql);
+//print_r($result);
+                            if(mysqli_num_rows($result) > 0){
+                            $row = mysqli_fetch_array($result);
+                            //echo $row;
                             $user = $row['username'];
                             $pass = $row['password'];
                             $id = $row['id'];
-                            $type = $row['type'];                    
-                            if($user == $username && $pass == $password){
+                            $type = $row['type'];    
                                 session_start();       
                                 $_SESSION['username'] = $user;
                                 $_SESSION['password'] = $pass;
                                 $_SESSION['id'] = $id;
                                 $_SESSION['type'] = $type;
+                                $_SESSION['id']=md5(time().$_SESSION['username']); //şimdilik kullanssız
                                 ?>
                                 <script>window.location.href='index.php';</script>
                                 <?php
-                            }else{
+                            }
+                            else{
                                 ?>
-                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                      <strong>Uyarı!</strong> Kullanıcı adı veya şifre hatalı.
-                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Uyarı!</strong> Kullanıcı adı veya şifre hatalı.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
                                 <?php
                             }
-                        
+
                         }
                         ?>
                         <form method="post">

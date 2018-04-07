@@ -1,5 +1,6 @@
 <?php
-    require('./readDataConfig.php');
+    include "config.php";
+    //require('./readDataConfig.php');
     $id = $_GET['id'];
 
     if (isset($_POST['submit'])) {
@@ -8,7 +9,7 @@
     	$password = $_POST['password'];
     	$yetki = $_POST['yetki'];
     
-        $sql = ("UPDATE kullanicilar SET username = '".$username."', password = '".md5($password)."', type = '".$yetki."' WHERE id ='".$id."'");
+        $sql = ("UPDATE kullanicilar SET username = '".$username."', password = '".$password."', type = '".$yetki."' WHERE id ='".$id."'");
         $result = mysqli_query($link, $sql);
         //echo $sql."--".$result;
             

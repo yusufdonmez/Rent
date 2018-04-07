@@ -1,6 +1,7 @@
 <?php
 include "checkin.php";
-require('./readDataConfig.php');
+include "config.php";
+//require('./readDataConfig.php');
 
 if(isset($_POST["query"]))
 {
