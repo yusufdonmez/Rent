@@ -3,10 +3,10 @@ include "checkin.php";
 include "config.php";
 ?>
 
-<!DOCTYPE html>
-<html>
- <head>
- <!-- Required meta tags -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -16,14 +16,9 @@ include "config.php";
     <script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
 
     <title>Araç Kiralama Otomasyonu</title>
+  </head>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>  
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
- 
- </head>
- <body>
-
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-static-top">
       <a class="navbar-brand" href="#">Araç Kiralama Otomasyonu</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +46,7 @@ include "config.php";
         </ul>
     </nav>
 
-  <div class="container">
+<div class="container">
       <div class="row">
           <div class="col-md-2"> </div>
           <div class="col-md-9">
@@ -65,19 +60,66 @@ include "config.php";
                 }
                 ?>
                 <hr class="my-4">
-                <label>Araç detaylarını arayın</label>
-                <div id="search_area">
-                  <input type="text" name="car_search" id="car_search" class="form-control input-lg" autocomplete="off" placeholder="araç ismi yazın" />
-               </div>
-               <div id="car_data"></div>
-              </div>
-          </div>
-      </div>
-  </div>
- </body>
-</html>
 
-   <!-- Modal -->
+                    <?php
+                    // Include config file
+                    require_once 'readDataConfig.php';
+                    
+                    // Attempt select query execution
+                    $sql = "SELECT * FROM cars";
+                    if($result = mysqli_query($link, $sql)){
+                        if(mysqli_num_rows($result) > 0){
+                            echo "<table class='table table-bordered table-striped'>";
+                                echo "<thead>";
+                                    echo "<tr>";
+                                        echo "<th>id</th>";
+                                        echo "<th>Plaka</th>";
+                                        echo "<th>Vites</th>";
+                                        echo "<th>Yakıt</th>";
+                                        echo "<th>Adı</th>";
+                                        echo "<th>Durumu</th>";
+                                        if($_SESSION['type'] == 'yonetici'){echo "<th>işlemler</th>";}
+                                    echo "</tr>";
+                                echo "</thead>";
+                                echo "<tbody>";
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<tr>";
+                                        echo "<td>" . $row['id'] . "</td>";
+                                        echo "<td>" . $row['plate'] . "</td>";
+                                        echo "<td>" . $row['gear'] . "</td>";
+                                        echo "<td>" . $row['fuel'] . "</td>";
+                                        echo "<td>" . $row['carName'] . "</td>";
+                                        echo "<td> " . $row['status'] . "</td>";
+                                        
+                                        if($_SESSION['type'] == 'yonetici' || $_SESSION['type'] == 'calisan' ){
+                                            echo "<td>";
+                                                echo "<a href='editCar.php?id=". $row['id'] ."' title='Düzenle' data-toggle='modal' data-target='#editModal' data-whatever='".$row['id']."' class='btn btn-primary btn-sm'>düzenle</a>";
+                                                echo "<a href='deleteCar.php?id=". $row['id'] ."' title='Kayıt Sil' data-toggle='tooltip' class='btn btn-danger btn-sm'> sil</a>";
+                                            echo "</td>";
+                                        }
+                                    echo "</tr>";
+                                }
+                                echo "</tbody>";                            
+                            echo "</table>";
+                            // Free result set
+                            mysqli_free_result($result);
+                        } else{
+                            echo "<p class='lead'><em>Kayıt Bulunamadı.</em></p>";
+                        }
+                    } else{
+                        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                    }
+ 
+                    // Close connection
+                    mysqli_close($link);
+                    ?>
+                </div>
+            </div>        
+        </div>
+    </div>
+
+
+        <!-- Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -92,50 +134,10 @@ include "config.php";
         </div>
     </div>
 
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
-<script>
-$(document).ready(function(){
- 
- load_data('');
- 
- function load_data(query, typehead_search = 'yes')
- {
-  $.ajax({
-   url:"fetch.php",
-   method:"POST",
-   data:{query:query, typehead_search:typehead_search},
-   success:function(data)
-   {
-    $('#car_data').html(data);
-   }
-  });
- }
- 
- $('#car_search').typeahead({
-  source: function(query, result){
-   $.ajax({
-    url:"fetch.php",
-    method:"POST",
-    data:{query:query},
-    dataType:"json",
-    success:function(data){
-     result($.map(data, function(item){
-      return item;
-     }));
-     load_data(query, 'yes');
-    }
-   });
-  }
- });
- 
- $(document).on('click', 'li', function(){
-  var query = $(this).text();
-  load_data(query);
- });
- 
-});
+    <script>
         $('#editModal').on('show.bs.modal', function (event) {
               var button = $(event.relatedTarget) // Button that triggered the modal
               var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -159,4 +161,7 @@ $(document).ready(function(){
         $('#editModal').on('hidden.bs.modal', function () {
          location.reload();
      })
-</script>
+     </script>
+
+  </body>
+  </html>
