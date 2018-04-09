@@ -14,5 +14,5 @@ if (isset($_SESSION['baslangicZamani'])) {
     }
 }
 $_SESSION['baslangicZamani'] = time();  
-echo $_SESSION['id'];
+//echo $_SESSION['id'];
 ?>
