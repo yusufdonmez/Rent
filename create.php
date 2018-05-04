@@ -12,7 +12,7 @@ $username_err = $password_err = $type_err = "";
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate username
-    $input_username = trim($_POST["username"]);
+    $input_username = filter_var(trim($_POST["username"]),FILTER_SANITIZE_STRING);
     if(empty($input_username)){
         $username_err = "Lütfen bir kullanıcı adı girin.";
     } else{
@@ -20,15 +20,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Validate password
-    $input_password = trim($_POST["password"]);
+    $input_password = filter_var(trim($_POST["password"]),FILTER_SANITIZE_STRING);
     if(empty($input_password)){
         $password_err = 'Please enter an password.';     
     } else{
-        $password = $input_password;
+        $password = md5($input_password);
     }
     
     // Validate type
-    $input_type = trim($_POST["type"]);
+    $input_type = filter_var(trim($_POST["type"]),FILTER_SANITIZE_STRING);
     if(empty($input_type)){
         $type_err = "Please enter the type";     
     } else{
@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($type_err)){
         // Prepare an insert statement
         $sql = "INSERT INTO kullanicilar (username, password, type) VALUES (?, ?, ?)";
-         echo "sql olustu";
+         //echo "sql olustu";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sss", $username, $password, $type);
@@ -117,7 +117,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                             <label>Şifre</label>
-                            <input type="password" name="password" class="form-control" >
+                            <input type="password" name="password" class="form-control" autocomplete="off" >
                             <span class="help-block"><?php echo $password_err;?></span>
                         </div>
                         <div class="form-group <?php echo (!empty($type_err)) ? 'has-error' : ''; ?>">

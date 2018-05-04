@@ -4,7 +4,7 @@ if(!isset($_SESSION['username'])){
     header("location:login.php");
     die();
 }
-$oturumOmru =1*60;
+$oturumOmru =5*60;
       
 if (isset($_SESSION['baslangicZamani'])) {
     $oturumSuresi = time() - $_SESSION['baslangicZamani'];

@@ -41,21 +41,30 @@
                         <?php
                         include 'config.php';
                         if( !empty($_POST['username'])  && !empty($_POST['password'])){
-                            $username = $_POST['username'];
-                            $password = $_POST['password'];                   
+                            $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+                            $password = md5(filter_var($_POST['password'], FILTER_SANITIZE_STRING));
                             
-                           $sql = "SELECT * FROM kullanicilar WHERE username='".$username."' AND password='".$password."'"; 
+                           //$sql = "SELECT * FROM kullanicilar WHERE username='".$username."' AND password='".$password."'"; 
                             //$sql = "SELECT * FROM kullanicilar WHERE username='' OR '1'='1' ";//
                            //print_r($sql);
-                            $result = mysqli_query($link, $sql);
-//print_r($result);
-                            if(mysqli_num_rows($result) > 0){
-                            $row = mysqli_fetch_array($result);
+
+                           $sql = "SELECT * FROM kullanicilar WHERE (username)=(?) AND (password)=(?)"; 
+                           $stmt = mysqli_prepare($link, $sql);
+                           mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+                           mysqli_stmt_execute($stmt);
+                           mysqli_stmt_bind_result($stmt,$user,$pass,$id,$type);
+                            //$result = mysqli_query($link, $stmt);
+                        //print_r($result);
+                           //echo $result;
+                        //if(mysqli_num_rows($result) > 0){
+
+                        if(mysqli_stmt_fetch($stmt)){
+                            //$row = mysqli_fetch_array($result);
                             //echo $row;
-                            $user = $row['username'];
-                            $pass = $row['password'];
-                            $id = $row['id'];
-                            $type = $row['type'];    
+                            //$user = $row['username'];
+                            //$pass = $row['password'];
+                            //$id = $row['id'];
+                            //$type = $row['type'];    
                                 session_start();       
                                 $_SESSION['username'] = $user;
                                 $_SESSION['password'] = $pass;
@@ -86,7 +95,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Şifre</label>
-                                <input type="password" class="form-control" name="password">
+                                <input type="password" class="form-control" name="password" autocomplete="off">
                             </div>
                             <input type="submit" value="Giriş" class="btn btn-primary">
                         </form>
