@@ -5,20 +5,27 @@
 
     if (isset($_POST['submit'])) {
     	$id = $_POST['id'];
-    	$username = $_POST['username'];
-    	$password = $_POST['password'];
-    	$yetki = $_POST['yetki'];
-    
-        $sql = ("UPDATE kullanicilar SET username = '".$username."', password = '".$password."', type = '".$yetki."' WHERE id ='".$id."'");
-        $result = mysqli_query($link, $sql);
-        //echo $sql."--".$result;
-            
+    	$username = filter_var($_POST['username'],FILTER_SANITIZE_STRING);
+    	$password = md5(filter_var($_POST['password'],FILTER_SANITIZE_STRING));
+    	$yetki = filter_var($_POST['yetki']);
+    	if(empty($_POST['password'])){
+    		$sql = ("UPDATE kullanicilar SET username = (?), type = (?) WHERE id = (?)");	
+    		$stmt = mysqli_prepare($link, $sql);
+        	mysqli_stmt_bind_param($stmt, "sss", $username,$yetki,$id);
+    	}else{
+			$sql = ("UPDATE kullanicilar SET username = (?), password = (?), type = (?) WHERE id = (?)");
+        	$stmt = mysqli_prepare($link, $sql);
+        	mysqli_stmt_bind_param($stmt, "ssss", $username, $password,$yetki,$id);    		
+    	}
+        mysqli_stmt_execute($stmt);
+
     	header("location:newReadUsers.php");
     } 
-    $sql = "SELECT * FROM `kullanicilar` WHERE `id`=".$id;
-    $result = mysqli_query($link, $sql);
-    $mem = mysqli_fetch_array($result);
-            
+    $stmt = mysqli_prepare($link, $sql = "SELECT * FROM `kullanicilar` WHERE `id`=(?)");
+    mysqli_stmt_bind_param($stmt, "s", $id);
+	mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $id, $username, $password,$type);
+    mysqli_stmt_fetch($stmt);           
 ?>
 
 <!DOCTYPE html>
@@ -37,19 +44,19 @@
 	<div class="modal-body">
 		<div class="form-group">
 		    <label for="id">ID</label>
-		    <input type="text" class="form-control" id="id" name="id" value="<?php echo $mem['id'];?>" readonly="true"/>
+		    <input type="text" class="form-control" id="id" name="id" value="<?php echo $id ;?>" readonly="true"/>
 		</div>
 		<div class="form-group">
 		    <label for="username">Kullanıcı Adı</label>
-	            <input type="text" class="form-control" id="username" name="username" value="<?php echo $mem['username'];?>" />
+	            <input type="text" class="form-control" id="username" name="username" value="<?php echo $username?>" />
 		</div>
 		<div class="form-group">
 		    <label for="password">Şifre</label>
-	            <input type="password" class="form-control" id="password" name="password" value=''/>
+	            <input type="password" class="form-control" id="password" name="password" value='' />
 		</div>
 		<div class="form-group">
 		     <label for="yetki">Yetki</label>
-		     <input type="text" class="form-control" id="yetki" name="yetki" value="<?php echo $mem['type'];?>" />
+		     <input type="text" class="form-control" id="yetki" name="yetki" value="<?php echo $type;?>" />
 		</div>
 		</div>
 		<div class="modal-footer">

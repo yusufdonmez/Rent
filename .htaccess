@@ -1,0 +1,4 @@
+Options -Indexes
+
+# prevent mime based attacks
+Header set X-Content-Type-Options "nosniff"
