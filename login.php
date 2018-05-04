@@ -52,7 +52,7 @@
                            $stmt = mysqli_prepare($link, $sql);
                            mysqli_stmt_bind_param($stmt, "ss", $username, $password);
                            mysqli_stmt_execute($stmt);
-                           mysqli_stmt_bind_result($stmt,$user,$pass,$id,$type);
+                           mysqli_stmt_bind_result($stmt,$id,$user,$pass,$type);
                             //$result = mysqli_query($link, $stmt);
                         //print_r($result);
                            //echo $result;

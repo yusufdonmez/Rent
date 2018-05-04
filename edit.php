@@ -5,9 +5,9 @@
 
     if (isset($_POST['submit'])) {
     	$id = $_POST['id'];
-    	$username = filter_var($_POST['username'],FILTER_SANITIZE_STRING);
-    	$password = md5(filter_var($_POST['password'],FILTER_SANITIZE_STRING));
-    	$yetki = filter_var($_POST['yetki']);
+    	$username = filter_var($_POST['username'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
+    	$password = md5(filter_var($_POST['password'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH));
+    	$yetki = filter_var($_POST['yetki'],FILTER_FLAG_STRIP_HIGH,FILTER_SANITIZE_STRING);
     	if(empty($_POST['password'])){
     		$sql = ("UPDATE kullanicilar SET username = (?), type = (?) WHERE id = (?)");	
     		$stmt = mysqli_prepare($link, $sql);
@@ -48,7 +48,7 @@
 		</div>
 		<div class="form-group">
 		    <label for="username">Kullanıcı Adı</label>
-	            <input type="text" class="form-control" id="username" name="username" value="<?php echo $username?>" />
+	            <input type="text" class="form-control" id="username" name="username" value="<?php echo $username;?>" />
 		</div>
 		<div class="form-group">
 		    <label for="password">Şifre</label>

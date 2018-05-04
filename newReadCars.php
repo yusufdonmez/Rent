@@ -131,12 +131,19 @@ $(document).ready(function(){
  });
  
  $(document).on('click', 'li', function(){
-  var query = $(this).text();
+  var query = escapeHtml($(this).text());
   load_data(query);
  });
  
 });
-        $('#editModal').on('show.bs.modal', function (event) {
+
+function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
+$('#editModal').on('show.bs.modal', function (event) {
               var button = $(event.relatedTarget) // Button that triggered the modal
               var recipient = button.data('whatever') // Extract info from data-* attributes
               var modal = $(this);
@@ -155,8 +162,9 @@ $(document).ready(function(){
                         console.log(err);
                     }
                 });  
-        })
-        $('#editModal').on('hidden.bs.modal', function () {
+})
+
+$('#editModal').on('hidden.bs.modal', function () {
          location.reload();
-     })
+})
 </script>

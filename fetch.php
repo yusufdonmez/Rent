@@ -5,6 +5,7 @@ include "config.php";
 
 if(isset($_POST["query"]))
 {
+  
  $request = mysqli_real_escape_string($link, $_POST["query"]);
  $query = "
   SELECT * FROM cars 
@@ -38,7 +39,7 @@ if($_SESSION["type"] != "musteri"){
    $data[] = $row["plate"];
    $data[] = $row["gear"];
    $data[] = $row["fuel"];
-   $data[] = $row["carName"];
+   $data[] = filter_var($row["carName"], FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
    $data[] = $row["status"];
    $html .= '
    <tr>
