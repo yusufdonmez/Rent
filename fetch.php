@@ -2,23 +2,17 @@
 include "checkin.php";
 include "config.php";
 //require('./readDataConfig.php');
-
+echo "fetch ",$_POST["query"];
 if(isset($_POST["query"]))
 {
-
+  echo $_POST["query"];
  $request = filter_var(mysqli_real_escape_string($link, $_POST["query"]), FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
- //$query = "
- // SELECT * FROM cars 
- // WHERE carName LIKE '%".$request."%' 
- // OR plate LIKE '%".$request."%'  ";
-
+echo $request;
   $stmt = mysqli_prepare($link, "SELECT * FROM cars WHERE carName LIKE CONCAT ('%', ?, '%') OR plate LIKE CONCAT ('%', ?, '%')");
   mysqli_stmt_bind_param($stmt, "ss", $request,$request);
   mysqli_stmt_execute($stmt);
   mysqli_stmt_bind_result($stmt, $id, $plate, $gear,$fuel,$carName,$status);
-//  mysqli_stmt_fetch($stmt);     
 
- //$result = mysqli_query($link, $query);
  $data =array();
  $html = '';
  $html .= '

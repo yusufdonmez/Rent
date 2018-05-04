@@ -131,7 +131,7 @@ $(document).ready(function(){
  });
  
  $(document).on('click', 'li', function(){
-  var query = escapeHtml($(this).text());
+  var query = $(this).text();
   load_data(query);
  });
  
