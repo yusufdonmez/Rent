@@ -140,7 +140,7 @@ $(document).ready(function(){
 function escapeHtml(str) {
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
+    return div.innerText;
 }
 
 $('#editModal').on('show.bs.modal', function (event) {
