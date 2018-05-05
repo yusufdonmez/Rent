@@ -56,7 +56,7 @@
 		</div>
 		<div class="form-group">
 		    <label for="password">Şifre</label>
-	            <input type="password" class="form-control" id="password" name="password" value='' />
+	            <input type="password" class="form-control" id="password" name="password" value='' autocomplete="off" />
 		</div>
 		<div class="form-group">
 		     <label for="yetki">Yetki</label>
