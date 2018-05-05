@@ -112,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group <?php echo (!empty($username)) ? 'has-error' : ''; ?>">
                             <label>Kullanıcı Adı</label>
-                            <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                            <input type="text" name="username" class="form-control" value="<?php echo $username; ?>" required>
                             <span class="help-block"><?php echo $username_err;?></span>
                         </div>
                         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
@@ -122,7 +122,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group <?php echo (!empty($type_err)) ? 'has-error' : ''; ?>">
                             <label>Yetki</label>
-                            <input type="text" name="type" class="form-control"  value="<?php echo $type; ?>">
+                            <input type="text" name="type" class="form-control"  value="<?php echo $type; ?>" required>
                             <span class="help-block"><?php echo $type_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Ekle">

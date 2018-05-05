@@ -1,6 +1,7 @@
 <?php
 include "checkin.php";
 include "config.php";
+error_reporting(0);
 ?>
 
 <!DOCTYPE html>

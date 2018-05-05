@@ -12,10 +12,10 @@ $plate_err = $gear_err = $fuel_err = $carName_err =  "";
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    $plate = filter_var($_POST["plate"],FILTER_SANITIZE_ENCODE);
-    $gear = filter_var($_POST["gear"],FILTER_SANITIZE_ENCODE);
-    $fuel = filter_var($_POST["fuel"],FILTER_SANITIZE_ENCODE);
-    $carName = filter_var($_POST["carName"],FILTER_SANITIZE_ENCODE);
+    $plate = filter_var($_POST["plate"],FILTER_SANITIZE_ENCODED);
+    $gear = filter_var($_POST["gear"],FILTER_SANITIZE_ENCODED);
+    $fuel = filter_var($_POST["fuel"],FILTER_SANITIZE_ENCODED);
+    $carName = filter_var($_POST["carName"],FILTER_SANITIZE_ENCODED);
     $status = "alınabilir";
            
     // Check input errors before inserting in database
@@ -98,22 +98,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group <?php echo (!empty($plate_err)) ? 'has-error' : ''; ?>">
                             <label>Plaka</label>
-                            <input type="text" name="plate" class="form-control" value="<?php echo $plate; ?>"  pattern="[A-Za-z0-9öçşiğüÖÇŞİĞÜI]">
+                            <input type="text" name="plate" class="form-control" value="<?php echo $plate; ?>" required>
                             <span class="help-block"><?php echo $plate_err;?></span>
                         </div>
                         <div class="form-group <?php echo (!empty($gear_err)) ? 'has-error' : ''; ?>">
                             <label>gear</label>
-                            <input type="text" name="gear" class="form-control" value="<?php echo $gear; ?>"  pattern="[A-Za-z0-9öçşiğüÖÇŞİĞÜI]">
+                            <input type="text" name="gear" class="form-control" value="<?php echo $gear; ?>"  required>
                             <span class="help-block"><?php echo $gear_err;?></span>
                         </div>
                         <div class="form-group <?php echo (!empty($fuel_err)) ? 'has-error' : ''; ?>">
                             <label>Yakıt</label>
-                            <input type="text" name="fuel" class="form-control"  value="<?php echo $fuel; ?>"  pattern="[A-Za-z0-9öçşiğüÖÇŞİĞÜI]">
+                            <input type="text" name="fuel" class="form-control"  value="<?php echo $fuel; ?>"  required>
                             <span class="help-block"><?php echo $fuel_err;?></span>
                         </div>
                         <div class="form-group <?php echo (!empty($carName_err)) ? 'has-error' : ''; ?>">
                             <label>Araç Adı</label>
-                            <input type="text" name="carName" class="form-control"  value="<?php echo $carName; ?>"  pattern="[A-Za-z0-9öçşiğüÖÇŞİĞÜI]">
+                            <input type="text" name="carName" class="form-control"  value="<?php echo $carName; ?>"  required>
                             <span class="help-block"><?php echo $carName_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Ekle">
