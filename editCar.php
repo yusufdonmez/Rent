@@ -1,7 +1,11 @@
 <?php
 	include "config.php";
     //require('./readDataConfig.php');
-    $id = $_GET['id'];
+    $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
+    if(!filter_var($id, FILTER_VALIDATE_INT)){
+    	header("location:newReadCars.php");
+    	die();
+    } 
 
     if (isset($_POST['submit'])) {
     	$id = filter_var($_POST['id'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
