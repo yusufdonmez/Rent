@@ -18,7 +18,7 @@ if(isset($_POST["query"]))
  ";
   $result = mysqli_query($link, $query);
   //error_log ($query, 3, "log.txt");
-  error_log ($request, 3, "log.txt");error_log ("\n", 3, "log.txt");
+
  /*
  $result = mysqli_query($link, $query);
   $stmt = mysqli_prepare($link, "SELECT * FROM cars WHERE carName LIKE CONCAT ('%', ?, '%') OR plate LIKE CONCAT ('%', ?, '%')");

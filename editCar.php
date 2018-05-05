@@ -1,5 +1,6 @@
 <?php
 	include "config.php";
+	error_reporting(0);
     //require('./readDataConfig.php');
     $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
 
