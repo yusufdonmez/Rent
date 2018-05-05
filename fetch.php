@@ -7,13 +7,17 @@ if(isset($_POST["query"]))
 {
 
  //$request = filter_var(mysqli_real_escape_string($link, $_POST["query"]), FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
- $request = mysqli_real_escape_string($link, $_POST["query"]);
+ $request = filter_var($_POST["query"],FILTER_SANITIZE_ENCODED);
+ //$request = filter_var($_POST["query"],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+ //$request = mysqli_real_escape_string($link, $_POST["query"]);
  $query = "
   SELECT * FROM cars 
   WHERE carName LIKE '%".$request."%' 
   OR plate LIKE '%".$request."%' 
  ";
   $result = mysqli_query($link, $query);
+  //error_log ($query, 3, "log.txt");
+  error_log ($request, 3, "log.txt");error_log ("\n", 3, "log.txt");
  /*
  $result = mysqli_query($link, $query);
   $stmt = mysqli_prepare($link, "SELECT * FROM cars WHERE carName LIKE CONCAT ('%', ?, '%') OR plate LIKE CONCAT ('%', ?, '%')");

@@ -67,7 +67,7 @@ include "config.php";
                 <hr class="my-4">
                 <label>Araç detaylarını arayın</label>
                 <div id="search_area">
-                  <input type="text" name="car_search" id="car_search" class="form-control input-lg" autocomplete="off" placeholder="araç ismi yazın" />
+                  <input type="text" name="car_search" id="car_search" class="form-control input-lg" autocomplete="off" placeholder="araç ismi yazın" pattern="[A-Za-z0-9öçşiğüÖÇŞİĞÜI]" />
                </div>
                <div id="car_data"></div>
               </div>
