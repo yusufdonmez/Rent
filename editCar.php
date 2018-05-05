@@ -2,25 +2,27 @@
 	include "config.php";
     //require('./readDataConfig.php');
     $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
-    if(!filter_var($id, FILTER_VALIDATE_INT)){
-    	header("location:newReadCars.php");
-    	die();
-    } 
+
 
     if (isset($_POST['submit'])) {
+		error_log (" if " ,3, "log.txt");error_log ("+\n", 3, "log.txt");
+
     	$id = filter_var($_POST['id'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
     	$plate = filter_var($_POST['plate'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
     	$gear = filter_var($_POST['gear'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
     	$fuel = filter_var($_POST['fuel'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
     	$carName = filter_var($_POST['carName'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
     	$status = filter_var($_POST['status'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
-    	
+
+    	error_log ($carName, 3, "log.txt");error_log ("-\n", 3, "log.txt");
+
     	$stmt = mysqli_prepare($link, "UPDATE cars SET plate = ?, gear = ?, fuel=?, carName=?, status=? WHERE id=?");
     	mysqli_stmt_bind_param($stmt, "ssssss", $plate,$gear,$fuel, $carName, $status,$id);
     	mysqli_stmt_execute($stmt);
             
     	header("location:newReadCars.php");
     }
+    error_log (" aftrif " ,3, "log.txt");error_log ("*\n", 3, "log.txt");
     $stmt = mysqli_prepare($link, "SELECT * FROM `cars` WHERE `id`=?");
     mysqli_stmt_bind_param($stmt, "s", $id);
 	mysqli_stmt_execute($stmt);

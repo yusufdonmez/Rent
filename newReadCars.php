@@ -106,7 +106,8 @@ $(document).ready(function(){
   $.ajax({
    url:"fetch.php",
    method:"POST",
-   data:{query:query, typehead_search:typehead_search},
+   data:{query:query,
+    typehead_search:encodeURIComponent(typehead_search)},
    success:function(data)
    {
     $('#car_data').html(data);

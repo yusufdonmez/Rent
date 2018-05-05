@@ -99,7 +99,9 @@ if($_SESSION["type"] != "musteri"){
    ';
  }
  $html .= '</table>';
+ //$typehead_search = filter_var($_POST['typehead_search'],FILTER_SANITIZE_ENCODED);
  if(isset($_POST['typehead_search']))
+ //if($typehead_search)
  {
   echo $html;
  }

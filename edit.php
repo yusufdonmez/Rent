@@ -2,24 +2,22 @@
     include "config.php";
     //require('./readDataConfig.php');
     $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
-    if(!filter_var($id, FILTER_VALIDATE_INT)){
-        header("location:newReadCars.php");
-        die();
-    } 
+    
 
     if (isset($_POST['submit'])) {
     	$id = $_POST['id'];
     	$username = filter_var($_POST['username'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
     	$password = md5(filter_var($_POST['password'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH));
-    	$yetki = filter_var($_POST['yetki'],FILTER_FLAG_STRIP_HIGH,FILTER_SANITIZE_STRING);
+        $type = filter_var($_POST['type'],FILTER_SANITIZE_STRING,FILTER_FLAG_STRIP_HIGH);
+
     	if(empty($_POST['password'])){
     		$sql = ("UPDATE kullanicilar SET username = (?), type = (?) WHERE id = (?)");	
     		$stmt = mysqli_prepare($link, $sql);
-        	mysqli_stmt_bind_param($stmt, "sss", $username,$yetki,$id);
+        	mysqli_stmt_bind_param($stmt, "sss", $username,$type,$id);
     	}else{
 			$sql = ("UPDATE kullanicilar SET username = (?), password = (?), type = (?) WHERE id = (?)");
         	$stmt = mysqli_prepare($link, $sql);
-        	mysqli_stmt_bind_param($stmt, "ssss", $username, $password,$yetki,$id);    		
+        	mysqli_stmt_bind_param($stmt, "ssss", $username, $password,$type,$id);    		
     	}
         mysqli_stmt_execute($stmt);
 
@@ -38,7 +36,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kullanıcı İşlemleril</title>
+    <title>Kullanıcı İşlemleri</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -59,8 +57,8 @@
 	            <input type="password" class="form-control" id="password" name="password" value='' autocomplete="off" />
 		</div>
 		<div class="form-group">
-		     <label for="yetki">Yetki</label>
-		     <input type="text" class="form-control" id="yetki" name="yetki" value="<?php echo $type;?>" />
+		     <label for="type">Yetki</label>
+		     <input type="text" class="form-control" id="type" name="type" value="<?php echo $type;?>" />
 		</div>
 		</div>
 		<div class="modal-footer">
