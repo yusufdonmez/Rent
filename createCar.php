@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
 include "checkin.php";
 include "config.php";
 if($_SESSION['type'] == "musteri"){

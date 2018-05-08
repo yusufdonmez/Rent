@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
 //$db = new pdo('mysql:host=localhost;dbname=rent','root','root');
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */

@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     include "config.php";
     if($_SESSION['type'] != "yonetici"){
     header("location:index.php");
