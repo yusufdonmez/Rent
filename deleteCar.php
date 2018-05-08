@@ -1,7 +1,7 @@
 <?php
     error_reporting(0);
     include "config.php";
-    if($_SESSION['type'] == "musteri"){
+    if($_SESSION['type'] === "musteri"){
     header("location:login.php");
     die();
     }

@@ -7,8 +7,7 @@
     die();
 	}
 
-    //require('./readDataConfig.php');
-    $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
+    $id = filter_var($_GET['id'],FILTER_VALIDATE_INT);
 
 
     if (isset($_POST['submit'])) {

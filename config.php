@@ -17,7 +17,7 @@ server with default setting (user 'root' with no password) */
 			define('DB_PASSWORD', 'sm4eUx5ZFzehBb8A');
     		break;
     	default:
-    		header("location:logout.php");
+    		//header("location:logout.php");
     		die();
     		break;
     }

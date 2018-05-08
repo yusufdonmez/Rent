@@ -1,7 +1,8 @@
 <?php
+error_reporting(0);
 include "checkin.php";
 include "config.php";
-error_reporting(0);
+
 if($_SESSION['type'] != "yonetici"){
     header("location:index.php");
     die();
