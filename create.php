@@ -1,6 +1,10 @@
 <?php
 include "checkin.php";
 include "config.php";
+if($_SESSION['type'] != "yonetici"){
+    header("location:index.php");
+    die();
+}
 
 // Include config file
 //require_once 'readDataConfig.php';

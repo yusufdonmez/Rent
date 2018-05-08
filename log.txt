@@ -531,3 +531,40 @@ FILTER_SANITIZE_FULL_SPECIAL_CHARS
 6
 6
 
+ aftrif  aftrif *
+ if +
+t5-
+ aftrif *
+ aftrif *
+ aftrif *
+ if +
+t5-
+ aftrif *
+ aftrif *
+ aftrif *
+ if +
+t5-
+ aftrif *
+ aftrif *
+*
+ if +
+arc55-
+ aftrif *
+ aftrif *
+ aftrif *
+ if +
+t5-
+ aftrif *
+ aftrif *
+ aftrif *
+ if +
+t5-
+ aftrif *
+ aftrif *
+ aftrif *
+ if +
+arc3-
+ aftrif *
+ aftrif *
+ aftrif *
+ aftrif *

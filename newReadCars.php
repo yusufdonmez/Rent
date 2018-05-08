@@ -20,7 +20,7 @@ error_reporting(0);
 
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap3-typeahead.min.js"></script>  
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+  <link rel="stylesheet" href="css/3.3.6.bootstrap.min.css" />  
  
  </head>
  <body>

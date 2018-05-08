@@ -1,5 +1,10 @@
 <?php
+	include "checkin.php";
 	include "config.php";
+	if($_SESSION['type'] == "musteri"){
+    header("location:index.php");
+    die();
+	}
 	error_reporting(0);
     //require('./readDataConfig.php');
     $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);

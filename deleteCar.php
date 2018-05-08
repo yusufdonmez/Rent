@@ -1,6 +1,9 @@
 <?php
-    //require('./readDataConfig.php');
-	include "config.php";
+    include "config.php";
+    if($_SESSION['type'] == "musteri"){
+    header("location:login.php");
+    die();
+    }
     
     $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
     if(!filter_var($id, FILTER_VALIDATE_INT)){

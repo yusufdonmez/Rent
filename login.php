@@ -39,7 +39,7 @@
                 <div class="panel panel-default">
                     <div class="panel body">
                         <?php
-                        include 'config.php';
+                        include 'login_con.php';
                         if( !empty($_POST['username'])  && !empty($_POST['password'])){
                             $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
                             $password = md5(filter_var($_POST['password'], FILTER_SANITIZE_STRING));
@@ -70,6 +70,7 @@
                                 $_SESSION['password'] = $pass;
                                 $_SESSION['id'] = $id;
                                 $_SESSION['type'] = $type;
+                                $_SESSION['baslangicZamani'] = time(); 
                                 $_SESSION['id']=md5(time().$_SESSION['username']); //şimdilik kullanssız
                                 ?>
                                 <script>window.location.href='index.php';</script>

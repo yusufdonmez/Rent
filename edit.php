@@ -1,6 +1,10 @@
 <?php
     include "config.php";
-    //require('./readDataConfig.php');
+    if($_SESSION['type'] != "yonetici"){
+    header("location:index.php");
+    die();
+    }
+   
     $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
     
 

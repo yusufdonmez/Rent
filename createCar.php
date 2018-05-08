@@ -1,6 +1,10 @@
 <?php
 include "checkin.php";
 include "config.php";
+if($_SESSION['type'] == "musteri"){
+    header("location:index.php");
+    die();
+}
 
 // Include config file
 //require_once 'readDataConfig.php';
